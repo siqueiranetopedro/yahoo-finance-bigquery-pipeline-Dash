@@ -15,7 +15,7 @@ def verify_realtime_data():
     # Initialize BigQuery client
     client = bigquery.Client(project='symbolic-axe-474621-e8')
     
-    print("🚀 REAL-TIME FINANCIAL DATA VERIFICATION")
+    print("REAL-TIME FINANCIAL DATA VERIFICATION")
     print("=" * 50)
     
     # Check real-time stock data
@@ -43,7 +43,7 @@ def verify_realtime_data():
             print(f"  {direction} {row.symbol}: ${row.price:.2f} ({row.change_pct:+.2f}%)")
             print(f"      Source: {row.data_source} | Day: {row.latest_trading_day}")
     except Exception as e:
-        print(f"  ❌ Error: {e}")
+        print(f"  Error: {e}")
     
     # Compare with old Alpha Vantage data
     old_stock_query = """
@@ -58,13 +58,13 @@ def verify_realtime_data():
     LIMIT 1
     """
     
-    print("\n🔄 COMPARISON WITH OLD DATA:")
+    print("\n COMPARISON WITH OLD DATA:")
     print("-" * 40)
     
     try:
         old_results = client.query(old_stock_query)
         for row in old_results:
-            print(f"  📊 OLD (Alpha Vantage): AAPL ${row.price:.2f} (Day: {row.latest_trading_day})")
+            print(f"   OLD (Alpha Vantage): AAPL ${row.price:.2f} (Day: {row.latest_trading_day})")
         
         new_results = client.query("""
         SELECT price, latest_trading_day 
@@ -75,13 +75,13 @@ def verify_realtime_data():
         """)
         
         for row in new_results:
-            print(f"  🚀 NEW (Yahoo Finance): AAPL ${row.price:.2f} (Day: {row.latest_trading_day})")
+            print(f"  NEW (Yahoo Finance): AAPL ${row.price:.2f} (Day: {row.latest_trading_day})")
             
     except Exception as e:
-        print(f"  ❌ Error: {e}")
+        print(f"   Error: {e}")
     
     # Show table counts
-    print("\n📊 DATA VOLUME:")
+    print("\n DATA VOLUME:")
     print("-" * 40)
     
     tables = [
@@ -99,16 +99,16 @@ def verify_realtime_data():
             """
             result = client.query(count_query)
             for row in result:
-                print(f"  📊 {table_name}: {row.total_rows} rows ({description})")
+                print(f"  {table_name}: {row.total_rows} rows ({description})")
         except Exception as e:
-            print(f"  📊 {table_name}: Table doesn't exist yet")
+            print(f"  {table_name}: Table doesn't exist yet")
     
-    print("\n🎯 SUMMARY:")
+    print("\n SUMMARY:")
     print("-" * 30)
-    print("  ✅ Yahoo Finance: LIVE real-time data during market hours")
-    print("  ✅ Alpha Vantage: Delayed data (yesterday's prices)")
-    print("  ✅ Both sources working and stored in BigQuery")
-    print("  ✅ Ready for live dashboard connection!")
+    print("  Yahoo Finance: LIVE real-time data during market hours")
+    print("  Alpha Vantage: Delayed data (yesterday's prices)")
+    print("  Both sources working and stored in BigQuery")
+    print("  Ready for live dashboard connection!")
 
 if __name__ == "__main__":
     verify_realtime_data()
