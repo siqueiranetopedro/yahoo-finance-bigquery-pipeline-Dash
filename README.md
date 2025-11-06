@@ -1,284 +1,153 @@
-# Yahoo Finance BigQuery Pipeline with Dash Dashboard# Google Cloud ETL Pipeline
+# Yahoo Finance BigQuery Pipeline with Dash Dashboard
 
+A real-time financial data pipeline that collects live market data from Yahoo Finance and Alpha Vantage APIs, stores it in Google BigQuery, and presents insights through an interactive web dashboard built with Plotly Dash.
 
+<img width="3688" height="1986" alt="image" src="https://github.com/user-attachments/assets/4ba2dccf-a15f-42bd-8692-d5308d8b2a17" />
 
-A comprehensive real-time financial data pipeline that collects live market data from Yahoo Finance and Alpha Vantage APIs, stores it in Google BigQuery, and presents insights through an interactive web dashboard built with Plotly Dash.**Author:** Pedro Siqueira
+<img width="3678" height="1624" alt="image" src="https://github.com/user-attachments/assets/ed5571a0-9475-4eed-be6c-80970b8134a0" />
+<img width="3674" height="1970" alt="image" src="https://github.com/user-attachments/assets/8f4470a2-9f78-4e1e-8f0e-d626eba8c9f4" />
 
+## Project Overview
 
+This project demonstrates a complete data engineering workflow from data collection to visualization. The system gets real-time stock prices and cryptocurrency data, processes and stores the information in Google Cloud database, and provides an interactive dashboard for monitoring market performance.
 
-## Project Overview## About This Project
+## What It Does
 
+The pipeline is built to collect, process, and visualize real-time market data using cloud technologies. It connects live financial APIs to Google Cloud for storage and analytics, then sends the results to an interactive dashboard for visualization.
 
+## Data Collection Layer
 
-This project demonstrates a complete data engineering workflow from data collection to visualization. The system fetches real-time stock prices and cryptocurrency data, processes and stores the information in Google Cloud infrastructure, and provides an interactive dashboard for monitoring market performance.I built this ETL pipeline to learn how to work with Google Cloud Platform and process real data in the cloud. 
+- Fetches live market data from Yahoo Finance API for stocks
+- Retrieves cryptocurrency prices from Alpha Vantage API
+- Cleans and formats the data using Python and pandas
 
+## Storage Layer
 
+- Stores raw files in Google Cloud Storage
+- Loads processed tables into BigQuery for analytics
+- Data flow: API → Python Processing → Cloud Storage → BigQuery → Analytics
 
-## Architecture## What It Does
+## Visualization Layer
 
+- Interactive Plotly Dash dashboard that queries BigQuery
+- Displays live stock and crypto data with updates every 30 seconds
+- Includes portfolio summaries, price trends, and performance comparisons
 
+## The Process
 
-The pipeline consists of three main components:The pipeline takes sales data from CSV files and processes it through Google Cloud:
+1. **Extract**
+   - Collects real-time stock prices from Yahoo Finance API
+   - Pulls cryptocurrency data from Alpha Vantage API
 
+2. **Transform**
+   - Cleans and formats the data using pandas
+   - Adds calculated fields like daily change and percent difference
+   - Runs automatic checks to make sure the data is valid
 
+3. **Load**
+   - Saves processed data to Google Cloud Storage
+   - Loads cleaned tables into BigQuery for analysis
 
-1. **Data Collection Layer**: Fetches live financial data from Yahoo Finance API for stocks and Alpha Vantage API for cryptocurrency prices```
+4. **Analyze**
+   - Runs SQL queries in BigQuery to get business insights
+   - Tracks portfolio performance, market trends, and trading volumes
 
-2. **Storage Layer**: Uses Google Cloud Storage for raw data files and BigQuery for structured data warehouseCSV File → Python Processing → Cloud Storage → BigQuery → Analytics
+## Dashboard Features
 
-3. **Visualization Layer**: Interactive Plotly Dash web application that queries BigQuery and displays real-time market data```
+- Live stock and crypto price updates every 30 seconds
+- Portfolio overview with top gainers and decliners
+- Real-time price trend and comparison charts
+- Trading volume and market performance summaries
+- Responsive layout for desktop and mobile
 
+## Tools and Libraries
 
+- Python 3.11+ as the main programming language
+- pandas for cleaning and transforming data
+- requests for API calls
+- Plotly and Dash for interactive charts and dashboard
+- Google Cloud Storage to store processed files
+- BigQuery for analytics and SQL queries
+- Google Cloud IAM for secure authentication with service accounts
 
-## Features**The process:**
+## Market Analytics
 
-1. **Extract** - Reads data from CSV files and validates it
+- Set up secure authentication with Google service accounts
+- Build portfolio performance metrics with error handling for API calls
+- Compare gaining and declining stocks to identify trends
+- Calculate average and cumulative market performance
 
-### Data Pipeline2. **Transform** - Cleans the data and adds calculated fields using pandas
+## Data Processing
 
-- Real-time stock price collection using Yahoo Finance API3. **Load** - Saves data to Google Cloud Storage and BigQuery
+- Track real-time price changes and volume indicators
+- Summarize trading activity by ticker and sector
+- Apply logic to transform raw API data into structured insights
+- Automate data validation and quality checks
 
-- Cryptocurrency data integration via Alpha Vantage API4. **Analyze** - Runs SQL queries to get business insights
+## Working with Cloud Services
 
-- Automated data processing and cleaning
+- Set up and manage Google Cloud Storage buckets
+- Create and organize BigQuery datasets and tables
+- Configure permissions using IAM service accounts
 
-- Google Cloud Storage integration for data persistence## Tools I Used
+## Code Structure
 
-- BigQuery data warehouse with optimized schemas
+**Main file: realtime_financial_pipeline.py**
+- Contains the EnhancedFinancialDataPipeline class that handles:
+- Extract, transform, and load steps
+- Error handling for failed API calls
+- SQL queries for analytics and reporting
 
-- Historical data tracking with timestamp-based records- **Python** - Main programming language for the pipeline
+**Dashboard files:**
+- financial_dashboard.py – interactive Plotly Dash app
+- verify_realtime_data.py – utility for checking data accuracy
 
-- **Pandas** - For cleaning and transforming the data
+## Setup and Requirements
 
-### Interactive Dashboard- **Google Cloud Storage** - To store the processed files
-
-- Live price updates every 30 seconds- **BigQuery** - Google's data warehouse for running queries
-
-- Market summary cards showing portfolio overview- **Google Cloud IAM** - For secure authentication
-
-- Best and worst performer identification
-
-- Trading volume analysis## What I Learned
-
-- Interactive price trend charts
-
-- Performance comparison visualizations**Working with Cloud Services:**
-
-- Responsive design for desktop and mobile- How to set up and use Google Cloud Storage buckets
-
-- Creating and managing BigQuery datasets and tables
-
-### Market Analytics- Setting up proper authentication with service accounts
-
-- Portfolio performance metrics- Handling errors when working with cloud APIs
-
-- Gaining vs declining stocks analysis
-
-- Average market performance calculations**Data Processing:**
-
-- Real-time price change indicators- Reading and validating CSV data with pandas
-
-- Trading volume summaries- Adding business logic to transform raw data
-
-- Creating automated data quality checks
-
-## Technology Stack- Building reusable code that handles different data sources
-
-
-
-**Programming Language**: Python 3.11+**What you need:**
-
-- Python 3.x with pandas installed
-
-**APIs and Data Sources**:- A Google Cloud account
-
-- Yahoo Finance (yfinance library)- Service account credentials (JSON file)
-
-- Alpha Vantage API- BigQuery and Cloud Storage enabled in your project
-
-
-
-**Cloud Infrastructure**:## Code Structure
-
-- Google Cloud Platform
-
-- Google Cloud StorageThe main file `pipeline_to_GC.py` contains:
-
-- Google BigQuery- `CloudETLPipeline` class that handles all the processing
-
-- Google Cloud IAM- Methods for extracting, transforming, and loading data
-
-- Error handling for when things go wrong
-
-**Data Processing**:- SQL queries for generating business reports
-
-- Pandas for data manipulation
-
-- Requests for API calls## Next Steps
-
-- JSON for data serialization
-
-Things I want to add in the future:
-
-**Visualization**:- Schedule the pipeline to run automatically
-
-- Plotly for interactive charts- Add more data sources like APIs or databases
-
-- Dash for web application framework- Create better monitoring and alerts
-
-- HTML/CSS for styling- Build a dashboard to visualize the results
-
-
-
-## Installation and Setup## Connection
-
-
-
-### PrerequisitesThis project builds on my previous work with Excel and APIs that you can see here: https://github.com/siqueiranetopedro/Pipelines_Excel-API
-
+### Prerequisites
 - Python 3.11 or higher
+- Google Cloud account with BigQuery and Storage enabled
+- Alpha Vantage API key (free tier)
+- Service account credentials (JSON file)
 
-- Google Cloud Platform accountFeel free to look at the code and reach out if you have questions about how it works.
-
-- Alpha Vantage API key (free tier available)
-
----
-
-### Required Python Packages
-
-```bash**Pedro Siqueira**  
-
-pip install pandas requests google-cloud-storage google-cloud-bigquery yfinance plotly dash pandas-gbqLearning data engineering and cloud technologies
-
+### Install Dependencies
+```bash
+pip install pandas requests google-cloud-storage google-cloud-bigquery yfinance plotly dash pandas-gbq
 ```
 
-### Google Cloud Setup
-1. Create a new Google Cloud Project
-2. Enable BigQuery and Cloud Storage APIs
-3. Create a service account with appropriate permissions
-4. Download the service account key file
-5. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable
+## How to Run
 
-### API Configuration
-1. Sign up for a free Alpha Vantage API key at https://www.alphavantage.co/support/#api-key
-2. Update the API key in the pipeline configuration
-
-## Usage
-
-### Running the Data Pipeline
-Execute the data collection pipeline to fetch fresh market data:
+### Run the Data Pipeline
 ```bash
 python realtime_financial_pipeline.py
 ```
 
 This will:
-- Fetch current stock prices for AAPL, GOOGL, MSFT, TSLA, AMZN
-- Collect Bitcoin exchange rate data
-- Store raw data in Google Cloud Storage
-- Load processed data into BigQuery tables
+- Fetch stock prices for AAPL, GOOGL, MSFT, TSLA, and AMZN
+- Collect Bitcoin exchange rates
+- Store raw files in Cloud Storage
+- Load processed data into BigQuery
 
-### Starting the Dashboard
-Launch the interactive web dashboard:
+### Run the Dashboard
 ```bash
 python financial_dashboard.py
 ```
 
-Access the dashboard at http://localhost:8050
+Access the app at: http://localhost:8050
 
-### Data Verification
-Check the current data status and validate pipeline execution:
-```bash
-python verify_realtime_data.py
-```
+## Future Improvements
 
-## File Structure
+- Automate daily runs with Cloud Scheduler or CRON jobs
+- Add new APIs and data sources
+- Set up performance alerts and monitoring
+- Add portfolio tracking and backtesting features
 
-- `realtime_financial_pipeline.py` - Main data collection and processing pipeline
-- `financial_dashboard.py` - Interactive Plotly Dash web application
-- `verify_realtime_data.py` - Data validation and pipeline verification utility
+## What I Learned
 
-## Data Schema
+- Building cloud-based ETL pipelines
+- Working with Google Cloud (BigQuery, IAM, Storage)
+- Managing real-time API data in Python
+- Designing interactive dashboards for analytics
 
-### Stock Prices Table (realtime_stock_prices)
-- symbol: Stock ticker symbol
-- price: Current stock price
-- change: Price change from previous close
-- change_percent: Percentage change
-- volume: Trading volume
-- timestamp: Data collection timestamp
-- Additional OHLC data (open, high, low, close)
-
-### Cryptocurrency Table (realtime_crypto_prices)
-- from_currency: Source currency (BTC)
-- to_currency: Target currency (USD)
-- exchange_rate: Current exchange rate
-- bid_price: Current bid price
-- ask_price: Current ask price
-- timestamp: Data collection timestamp
-
-## Dashboard Features
-
-### Market Summary Section
-- Overall market status (gaining vs declining stocks)
-- Average portfolio performance
-- Best performing stock of the day
-- Worst performing stock of the day
-- Total trading volume across tracked stocks
-
-### Individual Stock Cards
-- Current price with color-coded change indicators
-- Percentage change from previous close
-- Trading volume information
-- Up/down arrows for quick performance assessment
-
-### Interactive Charts
-- Price trend visualization over time
-- Performance comparison bar charts
-- Real-time data updates every 30 seconds
-
-## Cost Considerations
-
-This project is designed to operate within Google Cloud's free tier limits:
-- BigQuery: 1TB queries per month (free)
-- Cloud Storage: 5GB storage (free)
-- Minimal data transfer costs
-
-Typical monthly costs for moderate usage: $0.00 - $0.10
-
-## Performance Optimization
-
-- Efficient BigQuery schema design for fast queries
-- Optimized API calls with appropriate rate limiting
-- Cached data processing to minimize computation overhead
-- Responsive dashboard design for quick load times
-
-## Future Enhancements
-
-Potential areas for expansion:
-- Additional stock symbols and market indices
-- Technical indicators and moving averages
-- Price alert notifications
-- Portfolio tracking with investment amounts
-- Historical backtesting capabilities
-- Mobile application development
-- Automated deployment with CI/CD pipelines
-
-## Contributing
-
-This project serves as a demonstration of modern data engineering practices. Feel free to fork and extend the functionality for your own use cases.
-
-## License
-
-This project is available under the MIT License. See LICENSE file for details.
-
-## Author
-
-Pedro Siqueira  
-Data Engineer & Analytics Professional
-
-## Acknowledgments
-
-- Yahoo Finance for providing reliable financial data API
-- Alpha Vantage for cryptocurrency market data
-- Google Cloud Platform for scalable infrastructure
-- Plotly team for excellent visualization tools
+**Author: Pedro Siqueira**  
+Learning Data Engineering and Cloud Technologies
