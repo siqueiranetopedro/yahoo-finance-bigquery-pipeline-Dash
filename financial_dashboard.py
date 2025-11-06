@@ -356,10 +356,10 @@ class FinancialDashboard:
     
     def run(self, debug=True, port=8050):
         """Run the dashboard"""
-        print(f"🚀 Starting Financial Dashboard...")
-        print(f"📊 Dashboard will be available at: http://localhost:{port}")
-        print(f"🔄 Auto-refreshing every 30 seconds")
-        print(f"💡 Press Ctrl+C to stop")
+        print(f"Starting Financial Dashboard...")
+        print(f" Dashboard will be available at: http://localhost:{port}")
+        print(f" Auto-refreshing every 30 seconds")
+        print(f" Press Ctrl+C to stop")
         
         self.app.run_server(debug=debug, port=port, host='0.0.0.0')
 
