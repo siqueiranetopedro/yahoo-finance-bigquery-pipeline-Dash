@@ -96,7 +96,7 @@ class EnhancedFinancialDataPipeline:
                     }
                     
                     stock_records.append(stock_record)
-                    logger.info(f"✅ {symbol}: ${current_price:.2f} ({change_percent:+.2f}%) - LIVE DATA")
+                    logger.info(f"{symbol}: ${current_price:.2f} ({change_percent:+.2f}%) - LIVE DATA")
                     
                 except Exception as e:
                     logger.error(f"Error processing {symbol}: {e}")
@@ -139,7 +139,7 @@ class EnhancedFinancialDataPipeline:
                     }
                     
                     bitcoin_price = crypto_record['exchange_rate']
-                    logger.info(f"✅ Bitcoin: ${bitcoin_price:,.2f}")
+                    logger.info(f" Bitcoin: ${bitcoin_price:,.2f}")
                     
                     return [crypto_record]
                 else:
@@ -194,14 +194,14 @@ class EnhancedFinancialDataPipeline:
             job = self.bq_client.load_table_from_dataframe(df, table_ref, job_config=job_config)
             job.result()
             
-            logger.info(f"✅ Loaded {len(df)} rows to BigQuery table {table_name}")
+            logger.info(f" Loaded {len(df)} rows to BigQuery table {table_name}")
             
         except Exception as e:
             logger.error(f"Error loading to BigQuery: {e}")
     
     def run_enhanced_pipeline(self):
         """Run the enhanced real-time financial data pipeline"""
-        logger.info("🚀 Starting Enhanced Real-Time Financial Data Pipeline")
+        logger.info(" Starting Enhanced Real-Time Financial Data Pipeline")
         
         # Fetch real-time stock data from Yahoo Finance
         stock_data = self.fetch_realtime_stock_data()
@@ -228,7 +228,7 @@ class EnhancedFinancialDataPipeline:
             crypto_df = pd.DataFrame(crypto_data)
             self.load_to_bigquery(crypto_df, "realtime_crypto_prices")
         
-        logger.info("🎉 Enhanced Pipeline execution completed successfully!")
+        logger.info(" Enhanced Pipeline execution completed successfully!")
 
 def main():
     """Main function to run the enhanced pipeline"""
